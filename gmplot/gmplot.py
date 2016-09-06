@@ -170,8 +170,12 @@ class GoogleMapPlotter(object):
 
     # create the html file which include one google map and all points and
     # paths
+    # now draw is split into 2 methods so that no file need be created
     def draw(self, htmlfile):
         f = open(htmlfile, 'w')
+        self.draw_file(f)
+
+    def draw_file(self, f):
         f.write('<html>\n')
         f.write('<head>\n')
         f.write(
