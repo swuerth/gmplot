@@ -174,6 +174,7 @@ class GoogleMapPlotter(object):
     def draw(self, htmlfile):
         f = open(htmlfile, 'w')
         self.draw_file(f)
+        f.close()
 
     def draw_file(self, f):
         f.write('<html>\n')
@@ -201,7 +202,6 @@ class GoogleMapPlotter(object):
             '\t<div id="map_canvas" style="width: 100%; height: 100%;"></div>\n')
         f.write('</body>\n')
         f.write('</html>\n')
-        f.close()
 
     #############################################
     # # # # # # Low level Map Drawing # # # # # #
