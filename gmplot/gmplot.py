@@ -2,6 +2,7 @@ import math
 import requests
 import json
 import os
+#from bs4 import BeautifulSoup
 
 from .color_dicts import mpl_color_map, html_color_codes
 
@@ -171,12 +172,12 @@ class GoogleMapPlotter(object):
     # create the html file which include one google map and all points and
     # paths
     # now draw is split into 2 methods so that no file need be created
-    def draw(self, htmlfile):
+    def draw(self, htmlfile, key = ''):
         f = open(htmlfile, 'w')
-        self.draw_file(f)
+        self.draw_file(f, key)
         f.close()
 
-    def draw_file(self, f):
+    def draw_file(self, f, key = ''):
         f.write('<html>\n')
         f.write('<head>\n')
         f.write(
@@ -184,7 +185,10 @@ class GoogleMapPlotter(object):
         f.write(
             '<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>\n')
         f.write('<title>Google Maps - pygmaps </title>\n')
-        f.write('<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>\n')
+        if key != '':
+            key = 'key=' + key + '&'
+        f.write('<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?' + 
+                key + 'libraries=visualization&sensor=true_or_false"></script>\n')
         f.write('<script type="text/javascript">\n')
         f.write('\tfunction initialize() {\n')
         self.write_map(f)
